@@ -1,4 +1,5 @@
 import os   # standard python library
+import json # standard json library because we have company.js file which will be used in about.html page
 from flask import Flask, render_template #capital indicates that it is a class name, import as well render function so that I do not need to type html code
 
 
@@ -12,17 +13,20 @@ def index():     #I will create a function called "index", which just returns th
 
 @app.route("/about")
 def about():
-    return render_template("about.html")
+    data = [] # I initialize here the new empty list called data
+    with open("data/company.json", "r") as json_data:  # I need to initialize python to open json file as read only and assign this file to a new variable json_data
+        data = json.load(json_data)
+    return render_template("about.html", page_title="About", company=data)
 
 
 @app.route("/contact")
 def contact():
-    return render_template("contact.html")
+    return render_template("contact.html", page_title="Contact")
 
 
 @app.route("/carreers")
 def carreers():
-    return render_template("carreers.html")
+    return render_template("carreers.html", page_title="Carreers")
 
 if __name__ == "__main__":  #if name is equal to "main" (both wrapped in double underscores), then we're going to run our app with the following arguments. The word 'main' wrapped in double-underscores (__main__) is the name of the default module in Python.
     app.run(
