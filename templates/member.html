@@ -1,0 +1,14 @@
+{% extends "base.html" %} <!--when index.html loads, flask will inherit everything from its base template-->
+{% block content %}
+<div class="row">   
+    <div class="col-md-5">
+        <img src="{{ member.image_source }}" alt="Profile image for {{ member.name }}">
+        <div class="h2 col-md-7">{{ member.name }}</div>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <p>{{ member.description }}</p>
+</div>
+
+{% endblock %}
